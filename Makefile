@@ -1,13 +1,13 @@
 NAME		= cub3d
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -std=gnu17
 CPPFLAGS	= -I include -I $(LIBFT_DIR) -D BUFFER_SIZE=4096 -I $(MLX_DIR)
 RM			= rm -rf
 
 MLX_DIR     = minilibx-linux
 MLX         = $(MLX_DIR)/libmlx.a
-MLX_FLAGS   = -L$(MLX_DIR) -lmlx -lXext -lX11
+MLX_FLAGS   = -L$(MLX_DIR) -lmlx -lXext -lX11 
 
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
@@ -22,7 +22,8 @@ SRC			= main.c \
 			  parsing/parse_color.c \
 			  parsing/parse_map.c \
 			  parsing/check_map.c \
-			  parsing/scene_utils.c
+			  parsing/scene_utils.c \
+			  exec_game/close_event.c
 
 OBJ			= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 

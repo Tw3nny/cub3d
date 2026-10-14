@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 23:36:47 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/10/08 21:31:35 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/10/15 00:19:42 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	main(int ac, char **av)
 {
 	t_scene	scene;
+	void *init;
+	void *window;
 	int	y;
 
 	ft_bzero(&scene, sizeof(t_scene));
@@ -29,6 +31,16 @@ int	main(int ac, char **av)
 	y = 0;
 	while (y < scene.map_height)
 		printf("|%s|\n", scene.map[y++]);
+	init = mlx_init();
+	if(!init)
+		return (free_scene(&scene), 1);
+	window = mlx_new_window(init, 800, 600, "cub3d");
+	if(!window)
+		return (free_scene(&scene), 1);
+	mlx_hook(window, 17, 0, cross_close_event, NULL);
+	mlx_hook(window, 2, 1L<<0, esc_close_event, NULL);
+	if(!mlx_loop(init))
+		return (free_scene(&scene), 1);
 	free_scene(&scene);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tw3nny <tw3nny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/09/03 23:52:31 by tw3nny           ###   ########.fr       */
+/*   Updated: 2026/10/15 00:15:02 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "libft.h"
+# include "../minilibx-linux/mlx.h"
 
 /* ========================= */
 /*         Structures        */
@@ -40,7 +41,7 @@ typedef struct s_scene
 }	t_scene;
 
 /* ========================= */
-/*          Fonctions        */
+/*          Parsing          */
 /* ========================= */
 
 void	error(char *arg, char *str);
@@ -55,5 +56,12 @@ int		parse_map(char **lines, int i, t_scene *scene);
 int		check_map(t_scene *scene);
 int		check_extension(char *path, char *ext);
 int		check_texture(char *path);
+
+/* ========================= */
+/*          Exec             */
+/* ========================= */
+
+int cross_close_event();
+int esc_close_event(int keycode);
 
 #endif
