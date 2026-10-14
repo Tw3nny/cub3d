@@ -2,8 +2,12 @@ NAME		= cub3d
 
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
-CPPFLAGS	= -I include -I $(LIBFT_DIR) -D BUFFER_SIZE=4096
+CPPFLAGS	= -I include -I $(LIBFT_DIR) -D BUFFER_SIZE=4096 -I $(MLX_DIR)
 RM			= rm -rf
+
+MLX_DIR     = minilibx-linux
+MLX         = $(MLX_DIR)/libmlx.a
+MLX_FLAGS   = -L$(MLX_DIR) -lmlx -lXext -lX11
 
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
@@ -26,11 +30,14 @@ LDLIBS		= -lm
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(LIBFT) $(OBJ) $(MLX)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_FLAGS) $(LDLIBS) -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
+
+$(MLX):
+	make -C $(MLX_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -39,6 +46,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 clean:
 	$(RM) $(OBJ_DIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
