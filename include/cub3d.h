@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/10/15 00:15:02 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/10/16 01:21:46 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,27 @@ typedef struct s_scene
 	char			spawn_dir;
 }	t_scene;
 
+typedef struct s_display
+{
+	void *init;
+	void *window;
+}	t_display;
+
+typedef struct s_image
+{
+	void *img;
+	int bits_per_pixel;
+	int size_line;
+	int endian;
+	char *start_pixel;
+}	t_image;
+
+typedef struct s_all
+{
+	struct s_scene *scene;
+	struct s_display display;
+	struct s_image image;
+} t_all;
 /* ========================= */
 /*          Parsing          */
 /* ========================= */
