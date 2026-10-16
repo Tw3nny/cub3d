@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/10/16 01:21:46 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/10/17 00:56:28 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int		check_texture(char *path);
 /*          Exec             */
 /* ========================= */
 
-int cross_close_event();
-int esc_close_event(int keycode);
+int cross_close_event(t_all *all);
+int esc_close_event(int keycode, t_all *all);
+void free_everything(t_all *all);
 
 #endif
