@@ -23,7 +23,8 @@ SRC			= main.c \
 			  parsing/parse_map.c \
 			  parsing/check_map.c \
 			  parsing/scene_utils.c \
-			  exec_game/close_event.c
+			  exec_game/close_event.c \
+			  exec_game/exec_player.c 
 
 OBJ			= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/10/17 00:56:28 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/10/19 08:06:00 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,24 @@ typedef struct s_image
 	char *start_pixel;
 }	t_image;
 
+typedef struct s_player
+{
+	double pos_x;
+	double pos_y;
+	double eyes_x;
+	double eyes_y;
+	double fov_x;
+	double fov_y;
+} t_player;
+
 typedef struct s_all
 {
 	struct s_scene *scene;
 	struct s_display display;
 	struct s_image image;
+	struct s_player player;
 } t_all;
+
 /* ========================= */
 /*          Parsing          */
 /* ========================= */
@@ -85,5 +97,7 @@ int		check_texture(char *path);
 int cross_close_event(t_all *all);
 int esc_close_event(int keycode, t_all *all);
 void free_everything(t_all *all);
+void calcul_pos(t_scene *scene, t_player *player);
+void calcul_fov_eyes(t_scene *scene, t_player *player);
 
 #endif

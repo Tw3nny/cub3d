@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 23:36:47 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/10/17 00:54:57 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/10/19 08:13:30 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ int	main(int ac, char **av)
 	width = 800;
 	while (y < scene.map_height)
 		printf("|%s|\n", scene.map[y++]);
+	calcul_pos(all.scene, &all.player);
+	calcul_fov_eyes(all.scene, &all.player);
+	//printf("p_x : %f, p_y: %f \n all_spawn_x : %d, all_spwan_y : %d \n spawn_x : %d, spwan_y : %d \n", all.player.pos_x, all.player.pos_y, all.scene->spawn_x, all.scene->spawn_y, scene.spawn_x, scene.spawn_y );
+	//printf("pour %c alors \n eyes_x : %f, eyes_y : %f \n fov_x : %f, fov_y : %f", all.scene->spawn_dir, all.player.eyes_x, all.player.eyes_y, all.player.fov_x, all.player.fov_y);
 	all.display.init = mlx_init();
 	if(!all.display.init)
 		return (free_scene(&scene), 1);
