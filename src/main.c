@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 23:36:47 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/10/19 08:13:30 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/10/19 09:12:33 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@ int	main(int ac, char **av)
 {
 	t_all	all;
 	t_scene scene;
-	int height;
-	int width;
-	int gap;
-	char *pixel;
 	int	y;
-	int x;
 
 	ft_bzero(&scene, sizeof(t_scene));
 	ft_bzero(&all, sizeof(t_all));
@@ -37,8 +32,6 @@ int	main(int ac, char **av)
 	printf("f_color = 0x%06X\n", scene.f_color);
 	printf("map %d x %d   spawn (%d,%d) dir %c\n", scene.map_width, scene.map_height, scene.spawn_x, scene.spawn_y, scene.spawn_dir);
 	y = 0;
-	height = 600;
-	width = 800;
 	while (y < scene.map_height)
 		printf("|%s|\n", scene.map[y++]);
 	calcul_pos(all.scene, &all.player);
@@ -48,30 +41,18 @@ int	main(int ac, char **av)
 	all.display.init = mlx_init();
 	if(!all.display.init)
 		return (free_scene(&scene), 1);
-	all.display.window = mlx_new_window(all.display.init, width, height, "cub3d");
+	all.display.window = mlx_new_window(all.display.init, WIDTH, HEIGHT, "cub3d");
 	if(!all.display.window)
 		return (free_scene(&scene), 1);
-	all.image.img = mlx_new_image(all.display.init, width, height);
+	all.image.img = mlx_new_image(all.display.init, WIDTH, HEIGHT);
 	if(!all.image.img)
 		return (free_scene(&scene), 1);
 	all.image.start_pixel = mlx_get_data_addr(all.image.img, &all.image.bits_per_pixel, &all.image.size_line, &all.image.endian);
 	if(!all.image.start_pixel)
 		return (free_scene(&scene), 1);
+	sky_ground(&all);
 	//printf("bits = %d, size = %d, endian = %d\n", all.image.bits_per_pixel, all.image.size_line, all.image.endian);
 	//printf("map width %d  width %d", all.scene->map_width, scene.map_width);
-	y = 0;
-	while(y < height)
-	{
-		x = 0;
-		while(x < width)
-		{
-			gap = (y * all.image.size_line + x * (all.image.bits_per_pixel / 8));
-			pixel = all.image.start_pixel + gap;
-			*(unsigned int *)pixel = 0xFF0000;
-			x++;
-		}
-		y++;
-	}
 	mlx_put_image_to_window(all.display.init, all.display.window, all.image.img, 0, 0);
 	mlx_hook(all.display.window, 17, 0, cross_close_event, &all);
 	mlx_hook(all.display.window, 2, 1L<<0, esc_close_event, &all);
