@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/10/19 09:34:37 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/10/25 10:18:42 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <math.h>
 # include "libft.h"
 # include "../minilibx-linux/mlx.h"
 
@@ -68,6 +69,13 @@ typedef struct s_player
 	double fov_y;
 } t_player;
 
+typedef struct s_cam
+{
+	double camera_x;
+    double rayon_x;
+    double rayon_y;
+} t_cam;
+
 typedef struct s_all
 {
 	struct s_scene *scene;
@@ -104,5 +112,6 @@ void calcul_pos(t_scene *scene, t_player *player);
 void calcul_fov_eyes(t_scene *scene, t_player *player);
 void sky_ground(t_all *all);
 void draw_s_g(t_all *all, int y, unsigned int color_to_draw);
+void calcul_camera(t_player *player);
 
 #endif
