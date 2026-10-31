@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 07:23:22 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/10/31 13:00:20 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/10/31 14:56:54 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void calcul_camera(t_scene *scene, t_player *player)
     int wall_touched;
     int step;
     double distance;
+    int line_height;
+    int draw_start;
+    int draw_end;
 
     x = 0;
     step = 0; 
@@ -81,8 +84,17 @@ void calcul_camera(t_scene *scene, t_player *player)
             if(scene->map[posmap_y][posmap_x] == '1')
                 wall_touched = 1;
         }
+    line_height = HEIGHT / distance;
+    draw_start = HEIGHT / 2 - line_height / 2;
+    draw_end = HEIGHT / 2 + line_height / 2;
+    if(draw_start < 0)
+        draw_start = 0;
+    if(draw_end >= HEIGHT)
+        draw_end = HEIGHT - 1;
     if(x == 0 || x == 400 || x == 799)
-        printf("delta_dist_x %f,  delta_dist_y %f\nside_dist_x %f step_x %d\nside_dist_y %f step_y %d\n scene map %c\n step %d distance %f \n", delta_dist_x, delta_dist_y, side_dist_x, step_x, side_dist_y, step_y, scene->map[posmap_y][posmap_x], step, distance);
+        printf("line-height %d\n draw_start %d draw_end %d\n", line_height, draw_start, draw_end);
+    //if(x == 0 || x == 400 || x == 799)
+    //    printf("delta_dist_x %f,  delta_dist_y %f\nside_dist_x %f step_x %d\nside_dist_y %f step_y %d\n scene map %c\n step %d distance %f \n", delta_dist_x, delta_dist_y, side_dist_x, step_x, side_dist_y, step_y, scene->map[posmap_y][posmap_x], step, distance);
     x++;
     }
 }
