@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 07:23:22 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/10/26 16:16:59 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/10/31 13:00:20 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ void calcul_camera(t_scene *scene, t_player *player)
     double side_dist_y;
     int posmap_x;
     int posmap_y;
+    int wall_touched;
+    int step;
+    double distance;
 
     x = 0;
-    posmap_x = (int)player->pos_x;
-    posmap_y = (int)player->pos_y;
+    step = 0; 
     while(x < WIDTH)
     {
+        wall_touched = 0;
+        posmap_x = (int)player->pos_x;
+        posmap_y = (int)player->pos_y;
         cam.camera_x = 2 * x / WIDTH - 1;
         cam.rayon_x = player->eyes_x + player->fov_x * cam.camera_x;
         cam.rayon_y = player->eyes_y + player->fov_y * cam.camera_x;
@@ -55,9 +60,30 @@ void calcul_camera(t_scene *scene, t_player *player)
             step_y = 1;
             side_dist_y = (posmap_y + 1.0 - player->pos_y) * delta_dist_y;
         }
-        if(x == 0 || x == 400 || x == 799)
-            printf("delta_dist_x %f,  delta_dist_y %f\nside_dist_x %f step_x %d\nside_dist_y %f step_y %d\n", delta_dist_x, delta_dist_y, side_dist_x, step_x, side_dist_y, step_y);
-        x++;
+        while(wall_touched == 0)
+        {
+            if(side_dist_x < side_dist_y)
+            {
+                side_dist_x += delta_dist_x;
+                posmap_x += step_x;
+                step = 0;
+            }
+            else
+            {
+                side_dist_y += delta_dist_y;
+                posmap_y += step_y;
+                step = 1;
+            }
+            if(step == 0)
+                distance = side_dist_x - delta_dist_x;
+            else
+                distance = side_dist_y - delta_dist_y;
+            if(scene->map[posmap_y][posmap_x] == '1')
+                wall_touched = 1;
+        }
+    if(x == 0 || x == 400 || x == 799)
+        printf("delta_dist_x %f,  delta_dist_y %f\nside_dist_x %f step_x %d\nside_dist_y %f step_y %d\n scene map %c\n step %d distance %f \n", delta_dist_x, delta_dist_y, side_dist_x, step_x, side_dist_y, step_y, scene->map[posmap_y][posmap_x], step, distance);
+    x++;
     }
 }
 

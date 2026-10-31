@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/10/25 10:18:42 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/10/31 03:15:21 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,6 @@ void calcul_pos(t_scene *scene, t_player *player);
 void calcul_fov_eyes(t_scene *scene, t_player *player);
 void sky_ground(t_all *all);
 void draw_s_g(t_all *all, int y, unsigned int color_to_draw);
-void calcul_camera(t_player *player);
+void calcul_camera(t_scene *scene, t_player *player);
 
 #endif
