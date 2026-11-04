@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 23:36:47 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/10/31 03:30:07 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/04 04:11:55 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int ac, char **av)
 		printf("|%s|\n", scene.map[y++]);
 	calcul_pos(all.scene, &all.player);
 	calcul_fov_eyes(all.scene, &all.player);
-	calcul_camera(all.scene, &all.player);
 	//printf("p_x : %f, p_y: %f \n all_spawn_x : %d, all_spwan_y : %d \n spawn_x : %d, spwan_y : %d \n", all.player.pos_x, all.player.pos_y, all.scene->spawn_x, all.scene->spawn_y, scene.spawn_x, scene.spawn_y );
 	//printf("pour %c alors \n eyes_x : %f, eyes_y : %f \n fov_x : %f, fov_y : %f", all.scene->spawn_dir, all.player.eyes_x, all.player.eyes_y, all.player.fov_x, all.player.fov_y);
 	all.display.init = mlx_init();
@@ -50,6 +49,7 @@ int	main(int ac, char **av)
 	if(!all.image.start_pixel)
 		return (free_scene(&scene), 1);
 	sky_ground(&all);
+	calcul_camera(&all);
 	//printf("bits = %d, size = %d, endian = %d\n", all.image.bits_per_pixel, all.image.size_line, all.image.endian);
 	//printf("map width %d  width %d", all.scene->map_width, scene.map_width);
 	mlx_put_image_to_window(all.display.init, all.display.window, all.image.img, 0, 0);

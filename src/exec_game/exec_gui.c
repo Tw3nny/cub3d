@@ -6,11 +6,21 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 08:37:43 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/10/19 09:37:22 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/04 03:38:21 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void draw_pixel(t_all *all, int x, int y, unsigned int color_to_draw)
+{
+    int gap;
+	char *pixel;
+    
+    gap = (y * all->image.size_line + x * (all->image.bits_per_pixel / 8));
+    pixel = all->image.start_pixel + gap;
+    *(unsigned int *)pixel = color_to_draw;
+}
 
 void draw_s_g(t_all *all, int y, unsigned int color_to_draw)
 {
