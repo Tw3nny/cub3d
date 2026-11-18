@@ -25,7 +25,8 @@ SRC			= main.c \
 			  parsing/scene_utils.c \
 			  exec_game/close_event.c \
 			  exec_game/exec_player.c \
-			  exec_game/exec_gui.c 
+			  exec_game/exec_gui.c \
+			  exec_game/exec_view.c
 
 OBJ			= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
@@ -42,7 +43,7 @@ $(LIBFT):
 $(MLX):
 	make -C $(MLX_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c include/cub3d.h
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 

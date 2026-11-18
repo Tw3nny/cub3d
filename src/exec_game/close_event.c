@@ -14,10 +14,15 @@
 
 void free_everything(t_all *all)
 {
-    mlx_destroy_image(all->display.init, all->image.img);
-    mlx_destroy_window(all->display.init, all->display.window);
-    mlx_destroy_display(all->display.init);
-    free(all->display.init);
+    if(all->image.img != NULL )
+        mlx_destroy_image(all->display.init, all->image.img);
+    if(all->display.window != NULL)
+        mlx_destroy_window(all->display.init, all->display.window);
+    if(all->display.init != NULL)
+    {
+        mlx_destroy_display(all->display.init);
+        free(all->display.init);
+    }
     free_scene(all->scene);
 }
 

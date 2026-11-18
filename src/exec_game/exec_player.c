@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 07:23:22 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/04 06:09:05 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/13 09:26:05 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,93 +15,29 @@
 void calcul_camera(t_all *all)
 {
     t_cam cam;
+    t_draw draw;
     double x;
     int y;
-    double delta_dist_x;
-    double delta_dist_y;
-    int step_x;
-    int step_y;
-    double side_dist_x;
-    double side_dist_y;
-    int posmap_x;
-    int posmap_y;
-    int wall_touched;
-    int step;
-    double distance;
-    int line_height;
-    int draw_start;
-    int draw_end;
 
     x = 0;
-    step = 0;
     while(x < WIDTH)
     {
-        wall_touched = 0;
-        posmap_x = (int)all->player.pos_x;
-        posmap_y = (int)all->player.pos_y;
-        cam.camera_x = 2 * x / WIDTH - 1;
-        cam.rayon_x = all->player.eyes_x + all->player.fov_x * cam.camera_x;
-        cam.rayon_y = all->player.eyes_y + all->player.fov_y * cam.camera_x;
-        delta_dist_x = fabs(1 / cam.rayon_x);
-        delta_dist_y = fabs(1 / cam.rayon_y);
-        if(cam.rayon_x < 0)
-        {
-            step_x = -1;
-            side_dist_x = (all->player.pos_x - posmap_x) * delta_dist_x;
-        }
-        else
-        {
-            step_x = 1;
-            side_dist_x = (posmap_x + 1.0 - all->player.pos_x) * delta_dist_x;
-        }
-        if(cam.rayon_y < 0)
-        {
-            step_y = -1;
-            side_dist_y = (all->player.pos_y - posmap_y) * delta_dist_y;
-        }
-        else
-        {
-            step_y = 1;
-            side_dist_y = (posmap_y + 1.0 - all->player.pos_y) * delta_dist_y;
-        }
-        while(wall_touched == 0)
-        {
-            if(side_dist_x < side_dist_y)
-            {
-                side_dist_x += delta_dist_x;
-                posmap_x += step_x;
-                step = 0;
-            }
-            else
-            {
-                side_dist_y += delta_dist_y;
-                posmap_y += step_y;
-                step = 1;
-            }
-            if(step == 0)
-                distance = side_dist_x - delta_dist_x;
-            else
-                distance = side_dist_y - delta_dist_y;
-            if(all->scene->map[posmap_y][posmap_x] == '1')
-                wall_touched = 1;
-        }
-        line_height = HEIGHT / distance;
-        draw_start = HEIGHT / 2 - line_height / 2;
-        draw_end = HEIGHT / 2 + line_height / 2;
-        if(draw_start < 0)
-            draw_start = 0;
-        if(draw_end >= HEIGHT)
-            draw_end = HEIGHT - 1;
-        y = draw_start;
-        while (y <= draw_end)
+        player_setup(all, &cam, x);
+        rayon_cam(all, &cam);
+        cam_view(all, &cam);
+        draw.line_height = HEIGHT / cam.distance;
+        draw.draw_start = HEIGHT / 2 - draw.line_height / 2;
+        draw.draw_end = HEIGHT / 2 + draw.line_height / 2;
+        if(draw.draw_start < 0)
+            draw.draw_start = 0;
+        if(draw.draw_end >= HEIGHT)
+            draw.draw_end = HEIGHT - 1;
+        y = draw.draw_start;
+        while (y <= draw.draw_end)
         {
             draw_pixel(all, x, y, 0xFF0000);
             y++;
         }
-        //if(x == 0 || x == 400 || x == 799)
-        //    printf("line-height %d\n draw_start %d draw_end %d\n", line_height, draw_start, draw_end);
-        //if(x == 0 || x == 400 || x == 799)
-        //    printf("delta_dist_x %f,  delta_dist_y %f\nside_dist_x %f step_x %d\nside_dist_y %f step_y %d\n scene map %c\n step %d distance %f \n", delta_dist_x, delta_dist_y, side_dist_x, step_x, side_dist_y, step_y, scene->map[posmap_y][posmap_x], step, distance);
         x++;
     }
 }

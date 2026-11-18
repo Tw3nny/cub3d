@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/04 04:04:35 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/13 09:19:10 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,25 @@ typedef struct s_cam
 	double camera_x;
     double rayon_x;
     double rayon_y;
+	double delta_dist_x;
+    double delta_dist_y;
+    int step_x;
+    int step_y;
+    double side_dist_x;
+    double side_dist_y;
+    int posmap_x;
+    int posmap_y;
+    int wall_touched;
+    double distance;
+	int step;
 } t_cam;
+
+typedef struct s_draw
+{
+	int line_height;
+    int draw_start;
+    int draw_end;
+} t_draw;
 
 typedef struct s_all
 {
@@ -114,5 +132,8 @@ void sky_ground(t_all *all);
 void draw_s_g(t_all *all, int y, unsigned int color_to_draw);
 void calcul_camera(t_all *all);
 void draw_pixel(t_all *all, int x,  int y, unsigned int color_to_draw);
+void player_setup(t_all *all, t_cam *cam, double x);
+void rayon_cam(t_all *all, t_cam *cam);
+void cam_view(t_all *all,t_cam *cam);
 
 #endif
