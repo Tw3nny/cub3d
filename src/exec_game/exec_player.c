@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 07:23:22 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/13 09:26:05 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/18 12:39:28 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,7 @@ void calcul_camera(t_all *all)
         player_setup(all, &cam, x);
         rayon_cam(all, &cam);
         cam_view(all, &cam);
-        draw.line_height = HEIGHT / cam.distance;
-        draw.draw_start = HEIGHT / 2 - draw.line_height / 2;
-        draw.draw_end = HEIGHT / 2 + draw.line_height / 2;
-        if(draw.draw_start < 0)
-            draw.draw_start = 0;
-        if(draw.draw_end >= HEIGHT)
-            draw.draw_end = HEIGHT - 1;
+        calcul_draw_limit(&draw, &cam);
         y = draw.draw_start;
         while (y <= draw.draw_end)
         {

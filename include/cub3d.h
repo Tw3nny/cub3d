@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/13 09:19:10 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/18 12:39:56 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ void draw_pixel(t_all *all, int x,  int y, unsigned int color_to_draw);
 void player_setup(t_all *all, t_cam *cam, double x);
 void rayon_cam(t_all *all, t_cam *cam);
 void cam_view(t_all *all,t_cam *cam);
+void calcul_draw_limit(t_draw *draw, t_cam *cam);
 
 #endif
