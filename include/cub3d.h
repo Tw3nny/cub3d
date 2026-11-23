@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/23 15:56:19 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/23 19:00:58 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ typedef struct s_image
 	char *start_pixel;
 }	t_image;
 
+typedef struct s_texture
+{
+	struct s_image image;
+	char *path;
+	int height;
+	int width;
+} t_texture;
+
 typedef struct s_player
 {
 	double pos_x;
@@ -100,6 +108,7 @@ typedef struct s_all
 	struct s_display display;
 	struct s_image image;
 	struct s_player player;
+	struct s_texture texture[4];
 } t_all;
 
 /* ========================= */

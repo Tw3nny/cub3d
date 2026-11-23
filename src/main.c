@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 23:36:47 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/13 09:25:50 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/23 19:12:22 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ int	main(int ac, char **av)
 {
 	t_all	all;
 	t_scene scene;
+	int i;
 	int	y;
 
 	ft_bzero(&scene, sizeof(t_scene));
 	ft_bzero(&all, sizeof(t_all));
 	all.scene = &scene;
+	i = 0;
 	if (ac != 2)
 		return (error(NULL, "usage: ./cub3d <map.cub>"), 1);
 	if (!parse_scene(av[1], &scene))
@@ -45,6 +47,20 @@ int	main(int ac, char **av)
 	all.image.start_pixel = mlx_get_data_addr(all.image.img, &all.image.bits_per_pixel, &all.image.size_line, &all.image.endian);
 	if(!all.image.start_pixel)
 		return (free_everything(&all), 1);
+	all.texture[0].path = scene.no;
+	all.texture[1].path = scene.so;
+	all.texture[2].path = scene.we;
+	all.texture[3].path = scene.ea;
+	while(i < 4)
+	{
+		all.texture[i].image.img = mlx_xpm_file_to_image(all.display.init, all.texture[i].path, &all.texture[i].width, &all.texture[i].height);
+		if (!all.texture[i].image.img)
+			return (error(all.texture[i].path, "broken file"), free_everything(&all), 1);
+		all.texture[i].image.start_pixel = mlx_get_data_addr(all.texture[i].image.img, &all.texture[i].image.bits_per_pixel, &all.texture[i].image.size_line, &all.texture[i].image.endian);
+		if (!all.texture[i].image.start_pixel)
+			return (free_everything(&all), 1);
+		i++;
+	}
 	sky_ground(&all);
 	calcul_camera(&all);
 	mlx_put_image_to_window(all.display.init, all.display.window, all.image.img, 0, 0);

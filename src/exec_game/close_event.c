@@ -14,6 +14,15 @@
 
 void free_everything(t_all *all)
 {
+    int i;
+
+    i = 0;
+    while (i < 4)
+    {
+        if(all->texture[i].image.img != NULL)
+            mlx_destroy_image(all->display.init, all->texture[i].image.img);
+        i++;
+    }
     if(all->image.img != NULL )
         mlx_destroy_image(all->display.init, all->image.img);
     if(all->display.window != NULL)
