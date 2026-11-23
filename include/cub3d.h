@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/23 15:18:12 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/23 15:56:19 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void rayon_col(t_all *all, t_cam *cam, double x);
 void init_steps(t_all *all, t_cam *cam);
 void find_wall(t_all *all,t_cam *cam);
 void calcul_draw_limit(t_draw *draw, t_cam *cam);
-void draw_col(t_all *all, t_draw *draw, double x);
-
+void draw_col(t_all *all, t_draw *draw, double x, unsigned int color);
+unsigned int choose_texure(t_cam *cam);
 
 #endif

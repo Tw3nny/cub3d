@@ -6,20 +6,20 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 07:23:22 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/23 15:18:12 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/23 15:56:19 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void draw_col(t_all *all, t_draw *draw, double x)
+void draw_col(t_all *all, t_draw *draw, double x, unsigned int color)
 {
     int y;
 
     y = draw->draw_start;
     while (y <= draw->draw_end)
     {
-        draw_pixel(all, x, y, 0xFF0000);
+        draw_pixel(all, x, y, color);
         y++;
     }
 }
@@ -28,6 +28,7 @@ void calcul_camera(t_all *all)
 {
     t_cam cam;
     t_draw draw;
+    unsigned int color;
     double x;
 
     x = 0;
@@ -37,7 +38,8 @@ void calcul_camera(t_all *all)
         init_steps(all, &cam);
         find_wall(all, &cam);
         calcul_draw_limit(&draw, &cam);
-        draw_col(all, &draw, x);
+        color = choose_texure(&cam);
+        draw_col(all, &draw, x, color);
         x++;
     }
 }
