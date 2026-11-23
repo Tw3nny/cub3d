@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 12:36:42 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/18 12:39:41 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/23 15:18:12 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void calcul_draw_limit(t_draw *draw, t_cam *cam)
         draw->draw_end = HEIGHT - 1;
 }
 
-void player_setup(t_all *all, t_cam *cam, double x)
+void rayon_col(t_all *all, t_cam *cam, double x)
 {
         cam->wall_touched = 0;
         cam->posmap_x = (int)all->player.pos_x;
@@ -35,7 +35,7 @@ void player_setup(t_all *all, t_cam *cam, double x)
         cam->delta_dist_y = fabs(1 / cam->rayon_y);
 }
 
-void rayon_cam(t_all *all, t_cam *cam)
+void init_steps(t_all *all, t_cam *cam)
 {
     if(cam->rayon_x < 0)
     {
@@ -59,24 +59,24 @@ void rayon_cam(t_all *all, t_cam *cam)
     }
 }
 
-void cam_view(t_all *all,t_cam *cam)
+void find_wall(t_all *all,t_cam *cam)
 {
-    cam->step = 0;
+    cam->side = 0;
     while(cam->wall_touched == 0)
     {
         if(cam->side_dist_x < cam->side_dist_y)
         {
             cam->side_dist_x += cam->delta_dist_x;
             cam->posmap_x += cam->step_x;
-            cam->step = 0;
+            cam->side = 0;
         }
         else
         {
             cam->side_dist_y += cam->delta_dist_y;
             cam->posmap_y += cam->step_y;
-            cam->step = 1;
+            cam->side = 1;
         }
-        if(cam->step == 0)
+        if(cam->side == 0)
             cam->distance = cam->side_dist_x - cam->delta_dist_x;
         else
             cam->distance = cam->side_dist_y - cam->delta_dist_y;

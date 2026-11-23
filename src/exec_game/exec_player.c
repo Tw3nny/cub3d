@@ -6,32 +6,38 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 07:23:22 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/18 12:39:28 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/23 15:18:12 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void draw_col(t_all *all, t_draw *draw, double x)
+{
+    int y;
+
+    y = draw->draw_start;
+    while (y <= draw->draw_end)
+    {
+        draw_pixel(all, x, y, 0xFF0000);
+        y++;
+    }
+}
 
 void calcul_camera(t_all *all)
 {
     t_cam cam;
     t_draw draw;
     double x;
-    int y;
 
     x = 0;
     while(x < WIDTH)
     {
-        player_setup(all, &cam, x);
-        rayon_cam(all, &cam);
-        cam_view(all, &cam);
+        rayon_col(all, &cam, x);
+        init_steps(all, &cam);
+        find_wall(all, &cam);
         calcul_draw_limit(&draw, &cam);
-        y = draw.draw_start;
-        while (y <= draw.draw_end)
-        {
-            draw_pixel(all, x, y, 0xFF0000);
-            y++;
-        }
+        draw_col(all, &draw, x);
         x++;
     }
 }
