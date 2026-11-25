@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/25 09:46:54 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/25 10:24:49 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,6 @@ void draw_col(t_all *all, t_draw *draw, double x, t_texture *tex);
 int choose_texure(t_cam *cam);
 unsigned int read_pixel(t_texture *tex, int x, int y);
 double wall_x(t_all *all, t_cam *cam);
+void render(t_all *all);
 
 #endif

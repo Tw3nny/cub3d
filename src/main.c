@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 23:36:47 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/24 04:22:32 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/25 10:25:59 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,17 @@ int	main(int ac, char **av)
 			return (free_everything(&all), 1);
 		i++;
 	}
-	sky_ground(&all);
-	calcul_camera(&all);
-	mlx_put_image_to_window(all.display.init, all.display.window, all.image.img, 0, 0);
+	render(&all);
 	mlx_hook(all.display.window, 17, 0, cross_close_event, &all);
 	mlx_hook(all.display.window, 2, 1L<<0, esc_close_event, &all);
 	if(!mlx_loop(all.display.init))
 		return (free_everything(&all), 1);
 	free_everything(&all);
 	return (0);
+}
+void render(t_all *all)
+{
+	sky_ground(all);
+	calcul_camera(all);
+	mlx_put_image_to_window(all->display.init, all->display.window, all->image.img, 0, 0);	
 }
