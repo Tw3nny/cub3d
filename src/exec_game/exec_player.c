@@ -6,20 +6,26 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 07:23:22 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/25 09:40:23 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/25 10:13:18 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void draw_col(t_all *all, t_draw *draw, double x, unsigned int color)
+void draw_col(t_all *all, t_draw *draw, double x, t_texture *tex)
 {
     int y;
+    int top_wall;
+    int tex_y;
 
     y = draw->draw_start;
+    top_wall = HEIGHT / 2 - draw->line_height / 2;
     while (y <= draw->draw_end)
     {
-        draw_pixel(all, x, y, color);
+        tex_y = (y - top_wall) * tex->height / draw->line_height;
+        if(tex_y >= tex->height)
+            tex_y = tex->height - 1;
+        draw_pixel(all, x, y, read_pixel(tex, draw->tex_x, tex_y));
         y++;
     }
 }
@@ -28,8 +34,6 @@ void calcul_camera(t_all *all)
 {
     t_cam cam;
     t_draw draw;
-    unsigned int color;
-    int tex_x;
     int i;
     double x;
 
@@ -41,9 +45,8 @@ void calcul_camera(t_all *all)
         find_wall(all, &cam);
         calcul_draw_limit(&draw, &cam);
         i = choose_texure(&cam);
-        tex_x = (int)(wall_x(all, &cam) * all->texture[i].width);
-        color = read_pixel(&all->texture[i], tex_x, 0);
-        draw_col(all, &draw, x, color);
+        draw.tex_x = (int)(wall_x(all, &cam) * all->texture[i].width);
+       draw_col(all, &draw, x, &all->texture[i]);
         x++;
     }
 }

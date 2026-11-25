@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/24 04:10:48 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/25 09:46:54 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_cam
 typedef struct s_draw
 {
 	int line_height;
+	int tex_x;
     int draw_start;
     int draw_end;
 } t_draw;
@@ -145,7 +146,7 @@ void rayon_col(t_all *all, t_cam *cam, double x);
 void init_steps(t_all *all, t_cam *cam);
 void find_wall(t_all *all,t_cam *cam);
 void calcul_draw_limit(t_draw *draw, t_cam *cam);
-void draw_col(t_all *all, t_draw *draw, double x, unsigned int color);
+void draw_col(t_all *all, t_draw *draw, double x, t_texture *tex);
 int choose_texure(t_cam *cam);
 unsigned int read_pixel(t_texture *tex, int x, int y);
 double wall_x(t_all *all, t_cam *cam);
