@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 07:23:22 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/25 10:13:18 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/25 10:20:29 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ void calcul_camera(t_all *all)
         calcul_draw_limit(&draw, &cam);
         i = choose_texure(&cam);
         draw.tex_x = (int)(wall_x(all, &cam) * all->texture[i].width);
-       draw_col(all, &draw, x, &all->texture[i]);
+        if((cam.side == 0 && cam.rayon_x < 0) || (cam.side == 1 && cam.rayon_y > 0))
+            draw.tex_x = all->texture[i].width - 1 - draw.tex_x;
+        draw_col(all, &draw, x, &all->texture[i]);
         x++;
     }
 }
