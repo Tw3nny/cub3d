@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/23 15:31:57 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/24 00:21:26 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/25 09:38:17 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,15 @@ unsigned int read_pixel(t_texture *tex, int x, int y)
     color = *(unsigned int *)pixel;
 
     return(color);
+}
+
+double wall_x(t_all *all, t_cam *cam)
+{
+    double res;
+    
+    if(cam->side == 0)
+        res = all->player.pos_y + cam->distance * cam->rayon_y;
+    else
+        res = all->player.pos_x + cam->distance * cam->rayon_x;
+    return(res - floor(res));
 }
