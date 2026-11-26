@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tw3nny <tw3nny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 11:55:49 by matisgutier       #+#    #+#             */
-/*   Updated: 2026/09/04 22:03:04 by tw3nny           ###   ########.fr       */
+/*   Updated: 2026/11/26 22:06:23 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	close_grid(t_scene *scene)
 {
 	int	y;
 	int	x;
-	
+
 	y = 0;
 	while (y < scene->map_height)
 	{

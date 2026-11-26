@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 11:54:07 by matisgutier       #+#    #+#             */
-/*   Updated: 2026/10/19 09:38:37 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/26 22:07:07 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static int	store_value(char *line, int j, t_scene *scene)
 	return (1);
 }
 
-
 static int	handle_line(char *line, int *found, t_scene *scene)
 {
 	int	j;
@@ -111,4 +110,3 @@ int	parse_header(char **lines, int *i, t_scene *scene)
 		(*i)++;
 	return (1);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tw3nny <tw3nny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/24 11:54:43 by matisgutier       #+#    #+#             */
-/*   Updated: 2026/09/04 23:08:41 by tw3nny           ###   ########.fr       */
+/*   Updated: 2026/11/26 22:07:28 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	parse_map(char **lines, int i, t_scene *scene)
 	scene->map_height = rows + 2;
 	scene->map_width = cols + 2;
 	scene->map = alloc_grid(scene->map_height, scene->map_width);
-	if(!scene->map)
+	if (!scene->map)
 		return (error(NULL, "allocation failed"), 0);
 	copy_rows(scene->map, lines, i, rows);
 	return (1);
