@@ -50,5 +50,13 @@ int esc_close_event(int keycode, t_all *all)
         printf("fermeture");
         exit(0);
     }
+    if(keycode == 119 || keycode == 115)
+    {
+        if(keycode == 119)
+            move_forward(all);
+        if(keycode == 115)
+            move_back(all);
+        render(all);
+    }
     return(0);
 }

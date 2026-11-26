@@ -27,7 +27,8 @@ SRC			= main.c \
 			  exec_game/exec_player.c \
 			  exec_game/exec_gui.c \
 			  exec_game/exec_view.c \
-			  exec_game/exec_draw.c
+			  exec_game/exec_draw.c  \
+			  exec_game/exec_move.c
 
 OBJ			= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
