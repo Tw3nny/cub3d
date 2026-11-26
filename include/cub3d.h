@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/26 22:05:01 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/26 22:18:43 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,5 +157,6 @@ void					move(t_all *all, int keycode);
 void					rotate(t_all *all, int keycode);
 int						load_textures(t_all *all, t_scene *scene);
 int						init_mlx(t_all *all);
+void					try_move(t_all *all, double dir_x, double dir_y);
 
 #endif
