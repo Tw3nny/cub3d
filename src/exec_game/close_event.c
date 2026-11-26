@@ -38,7 +38,6 @@ void free_everything(t_all *all)
 int cross_close_event(t_all *all)
 {
     free_everything(all);
-    printf("fermeture");
     exit(0);
 }
 
@@ -47,7 +46,6 @@ int click_event(int keycode, t_all *all)
     if(keycode == 65307)
     {
         free_everything(all);
-        printf("fermeture");
         exit(0);
     }
     if(keycode == 119 || keycode == 115 || keycode == 100 || keycode == 97)
