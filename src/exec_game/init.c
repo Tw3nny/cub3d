@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 07:23:22 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/26 22:24:31 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/26 22:31:42 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,23 @@ int	load_textures(t_all *all, t_scene *scene)
 	int	i;
 
 	i = 0;
-	all->texture[0].path = scene->no;
-	all->texture[1].path = scene->so;
-	all->texture[2].path = scene->we;
-	all->texture[3].path = scene->ea;
+	all->tex[0].path = scene->no;
+	all->tex[1].path = scene->so;
+	all->tex[2].path = scene->we;
+	all->tex[3].path = scene->ea;
 	while (i < 4)
 	{
-		all->texture[i].image.img = mlx_xpm_file_to_image(all->display.init,
-				all->texture[i].path, &all->texture[i].width,
-				&all->texture[i].height);
-		if (!all->texture[i].image.img)
-			return (error(all->texture[i].path, "broken file"),
+		all->tex[i].image.img = mlx_xpm_file_to_image(all->display.init,
+				all->tex[i].path, &all->tex[i].width,
+				&all->tex[i].height);
+		if (!all->tex[i].image.img)
+			return (error(all->tex[i].path, "broken file"),
 				free_everything(all), 1);
-		all->texture[i].image.start_pixel = mlx_get_data_addr(all->texture[i].image.img,
-				&all->texture[i].image.bits_per_pixel,
-				&all->texture[i].image.size_line,
-				&all->texture[i].image.endian);
-		if (!all->texture[i].image.start_pixel)
+		all->tex[i].image.start_pixel = mlx_get_data_addr(all->tex[i].image.img,
+				&all->tex[i].image.bits_per_pixel,
+				&all->tex[i].image.size_line,
+				&all->tex[i].image.endian);
+		if (!all->tex[i].image.start_pixel)
 			return (error(NULL, "mlx_get_data_addr failed"),
 				free_everything(all), 1);
 		i++;

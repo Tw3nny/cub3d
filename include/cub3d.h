@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/26 22:18:43 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/26 22:31:42 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct s_all
 	struct s_display	display;
 	struct s_image		image;
 	struct s_player		player;
-	struct s_texture	texture[4];
+	struct s_texture	tex[4];
 }						t_all;
 
 /* ========================= */

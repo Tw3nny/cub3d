@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/26 22:03:25 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/26 22:03:30 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/26 22:31:42 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	free_everything(t_all *all)
 	i = 0;
 	while (i < 4)
 	{
-		if (all->texture[i].image.img != NULL)
-			mlx_destroy_image(all->display.init, all->texture[i].image.img);
+		if (all->tex[i].image.img != NULL)
+			mlx_destroy_image(all->display.init, all->tex[i].image.img);
 		i++;
 	}
 	if (all->image.img != NULL)
