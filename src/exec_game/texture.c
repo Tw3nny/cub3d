@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_draw.c                                        :+:      :+:    :+:   */
+/*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/23 15:31:57 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/26 21:12:26 by Neanuphar        ###   ########.fr       */
+/*   Created: 2026/10/19 08:37:43 by Neanuphar         #+#    #+#             */
+/*   Updated: 2026/11/26 21:38:01 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int choose_texure(t_cam *cam)
             return (1);
     }
 }
-
 unsigned int read_pixel(t_texture *tex, int x, int y)
 {
     int gap;
@@ -42,14 +41,20 @@ unsigned int read_pixel(t_texture *tex, int x, int y)
 
     return(color);
 }
-
-double wall_x(t_all *all, t_cam *cam)
+void draw_col(t_all *all, t_draw *draw, double x, t_texture *tex)
 {
-    double res;
-    
-    if(cam->side == 0)
-        res = all->player.pos_y + cam->distance * cam->rayon_y;
-    else
-        res = all->player.pos_x + cam->distance * cam->rayon_x;
-    return(res - floor(res));
+    int y;
+    int top_wall;
+    int tex_y;
+
+    y = draw->draw_start;
+    top_wall = HEIGHT / 2 - draw->line_height / 2;
+    while (y <= draw->draw_end)
+    {
+        tex_y = (y - top_wall) * tex->height / draw->line_height;
+        if(tex_y >= tex->height)
+            tex_y = tex->height - 1;
+        draw_pixel(all, x, y, read_pixel(tex, draw->tex_x, tex_y));
+        y++;
+    }
 }

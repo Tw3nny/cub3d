@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_gui.c                                         :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/19 08:37:43 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/04 03:38:21 by Neanuphar        ###   ########.fr       */
+/*   Created: 2026/11/23 15:31:57 by Neanuphar         #+#    #+#             */
+/*   Updated: 2026/11/26 21:39:47 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void draw_pixel(t_all *all, int x, int y, unsigned int color_to_draw)
     pixel = all->image.start_pixel + gap;
     *(unsigned int *)pixel = color_to_draw;
 }
-
 void draw_s_g(t_all *all, int y, unsigned int color_to_draw)
 {
     int gap;
@@ -37,7 +36,6 @@ void draw_s_g(t_all *all, int y, unsigned int color_to_draw)
         x++;
     }
 }
-
 void sky_ground(t_all *all)
 {
     int y;
@@ -53,4 +51,32 @@ void sky_ground(t_all *all)
         draw_s_g(all, y, all->scene->f_color);
         y++;
     }
+}
+void calcul_camera(t_all *all)
+{
+    t_cam cam;
+    t_draw draw;
+    int i;
+    double x;
+
+    x = 0;
+    while(x < WIDTH)
+    {
+        rayon_col(all, &cam, x);
+        init_steps(all, &cam);
+        find_wall(all, &cam);
+        calcul_draw_limit(&draw, &cam);
+        i = choose_texure(&cam);
+        draw.tex_x = (int)(wall_x(all, &cam) * all->texture[i].width);
+        if((cam.side == 0 && cam.rayon_x < 0) || (cam.side == 1 && cam.rayon_y > 0))
+            draw.tex_x = all->texture[i].width - 1 - draw.tex_x;
+        draw_col(all, &draw, x, &all->texture[i]);
+        x++;
+    }
+}
+void render(t_all *all)
+{
+	sky_ground(all);
+	calcul_camera(all);
+	mlx_put_image_to_window(all->display.init, all->display.window, all->image.img, 0, 0);	
 }
