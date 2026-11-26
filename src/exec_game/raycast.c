@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 12:36:42 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/26 21:40:15 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/26 21:47:10 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,11 @@ void find_wall(t_all *all,t_cam *cam)
 }
 void calcul_draw_limit(t_draw *draw, t_cam *cam)
 {
+    if (cam->distance < 0.01)
+        cam->distance = 0.01;
     draw->line_height = HEIGHT / cam->distance;
+    if (draw->line_height < 1)
+        draw->line_height = 1;
     draw->draw_start = HEIGHT / 2 - draw->line_height / 2;
     draw->draw_end = HEIGHT / 2 + draw->line_height / 2;
     if(draw->draw_start < 0)
