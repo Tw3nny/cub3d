@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/26 20:14:35 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/26 20:35:48 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,6 @@ unsigned int read_pixel(t_texture *tex, int x, int y);
 double wall_x(t_all *all, t_cam *cam);
 void render(t_all *all);
 void move(t_all *all, int keycode);
+void rotate(t_all *all, int keycode);
 
 #endif

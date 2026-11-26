@@ -55,5 +55,10 @@ int click_event(int keycode, t_all *all)
         move(all, keycode);
         render(all);
     }
+    if (keycode == 65363 || keycode == 65361)
+    {
+        rotate(all, keycode);
+        render(all);
+    }
     return(0);
 }
