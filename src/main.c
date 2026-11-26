@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 23:36:47 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/26 21:42:29 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/26 22:01:31 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int ac, char **av)
 {
 	t_all	all;
-	t_scene scene;
+	t_scene	scene;
 
 	ft_bzero(&scene, sizeof(t_scene));
 	ft_bzero(&all, sizeof(t_all));
@@ -26,13 +26,13 @@ int	main(int ac, char **av)
 		return (free_scene(&scene), 1);
 	calcul_pos(all.scene, &all.player);
 	calcul_fov_eyes(all.scene, &all.player);
-	if(init_mlx(&all) == 1)
-		return(1);
-	if(load_textures(&all, &scene) == 1)
-		return(1);
+	if (init_mlx(&all) == 1)
+		return (1);
+	if (load_textures(&all, &scene) == 1)
+		return (1);
 	render(&all);
 	mlx_hook(all.display.window, 17, 0, cross_close_event, &all);
-	mlx_hook(all.display.window, 2, 1L<<0, click_event, &all);
+	mlx_hook(all.display.window, 2, 1L << 0, click_event, &all);
 	mlx_loop(all.display.init);
 	free_everything(&all);
 	return (0);
