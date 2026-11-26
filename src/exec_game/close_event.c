@@ -42,7 +42,7 @@ int cross_close_event(t_all *all)
     exit(0);
 }
 
-int esc_close_event(int keycode, t_all *all)
+int click_event(int keycode, t_all *all)
 {
     if(keycode == 65307)
     {
@@ -50,12 +50,9 @@ int esc_close_event(int keycode, t_all *all)
         printf("fermeture");
         exit(0);
     }
-    if(keycode == 119 || keycode == 115)
+    if(keycode == 119 || keycode == 115 || keycode == 100 || keycode == 97)
     {
-        if(keycode == 119)
-            move_forward(all);
-        if(keycode == 115)
-            move_back(all);
+        move(all, keycode);
         render(all);
     }
     return(0);

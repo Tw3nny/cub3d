@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 22:12:32 by tw3nny            #+#    #+#             */
-/*   Updated: 2026/11/25 10:48:49 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/26 20:14:35 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int		check_texture(char *path);
 /* ========================= */
 
 int cross_close_event(t_all *all);
-int esc_close_event(int keycode, t_all *all);
+int click_event(int keycode, t_all *all);
 void free_everything(t_all *all);
 void calcul_pos(t_scene *scene, t_player *player);
 void calcul_fov_eyes(t_scene *scene, t_player *player);
@@ -151,7 +151,6 @@ int choose_texure(t_cam *cam);
 unsigned int read_pixel(t_texture *tex, int x, int y);
 double wall_x(t_all *all, t_cam *cam);
 void render(t_all *all);
-void move_forward(t_all *all);
-void move_back(t_all *all);
+void move(t_all *all, int keycode);
 
 #endif
