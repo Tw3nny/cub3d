@@ -6,7 +6,7 @@
 /*   By: Neanuphar <Neanuphar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 07:23:22 by Neanuphar         #+#    #+#             */
-/*   Updated: 2026/11/26 21:41:19 by Neanuphar        ###   ########.fr       */
+/*   Updated: 2026/11/26 21:53:11 by Neanuphar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,32 +57,16 @@ void calcul_pos(t_scene *scene, t_player *player)
 
 void calcul_fov_eyes(t_scene *scene, t_player *player)
 {
+    player->eyes_x = 0;
+    player->eyes_y = 0;
     if (scene->spawn_dir == 'N')
-    {
-        player->eyes_x = 0;
         player->eyes_y = -1;
-        player->fov_x = 0.66;
-        player->fov_y = 0;
-    }
     else if (scene->spawn_dir == 'S')
-    {
-        player->eyes_x = 0;
         player->eyes_y = 1;
-        player->fov_x = -0.66;
-        player->fov_y = 0;
-    }
     else if (scene->spawn_dir == 'E')
-    {
         player->eyes_x = 1;
-        player->eyes_y = 0;
-        player->fov_x = 0;
-        player->fov_y = 0.66;
-    }
     else
-    {
         player->eyes_x = -1;
-        player->eyes_y = 0;
-        player->fov_x = 0;
-        player->fov_y = -0.66;
-    }
+    player->fov_x = -player->eyes_y * 0.66;
+    player->fov_y = player->eyes_x * 0.66;
 }
