@@ -43,7 +43,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX):
-	make -C $(MLX_DIR)
+	make -C $(MLX_DIR) CC="gcc -std=gnu17"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c include/cub3d.h
 	@mkdir -p $(dir $@)
